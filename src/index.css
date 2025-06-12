@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@layer base {
+    #root {
+        background-color: #FFFF;
+    }
+
+    #root.dark {
+        background-color: #050505;
+    }
+}
+
 @theme {
     --font-mono: "Inconsolata", monospace;
     --font-sans: "Inter", sans-serif;
@@ -22,4 +32,13 @@
     --breakpoint-tablet: 768px;
     --breakpoint-desktop: 1440px;
 }
+
+
+@custom-variant toggle-on {
+    &.on {
+        @slot;
+
+    }
+}
+
 
