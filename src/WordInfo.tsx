@@ -38,7 +38,7 @@ export default function WordInfo({font}: {font: string}) {
                     </button>
                 </div>
                 {/*meanings section*/}
-                {wordState?.wordInfo?.meanings.map((meaning, index) => {
+                {wordState?.wordInfo?.meanings.map((meaning) => {
                     return (
                         <div className="mb-[35px] flex flex-col gap-[35px] tablet:gap-[39px] tablet:mb-[43px] desktop:mb-0">
                             <div className="flex gap-[25px] items-center">
@@ -49,7 +49,7 @@ export default function WordInfo({font}: {font: string}) {
                                 <span className="font-normal text-[16px] leading-[auto] text-[#757575] tablet:text-[20px]">Meaning</span>
                                 <ul className="flex flex-col gap-[13px] font-normal text-[15px] leading-[24px] text-[#2D2D2D] dark:text-[#FFFFFF] tablet:text-[18px] tablet:ml-[22px]">
                                     {
-                                        meaning.definitions.map((definition, index) => {
+                                        meaning.definitions.map((definition) => {
                                             return (
                                                 <li className="flex gap-[20px] items-start">
                                                     <span className="mt-[10px] w-[5px] h-[5px] bg-[#8F19E8] inline-block self-start rounded-full shrink-0"/>

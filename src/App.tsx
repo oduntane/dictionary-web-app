@@ -91,64 +91,6 @@ function App() {
   }, [darkTheme])
 
 
-  useEffect(() => {
-    axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`)
-        .then((res) => {
-          console.log(res.data)
-          const wordInfo : {
-            word: string,
-            phonetic: string,
-            meanings: {
-              partOfSpeech: string,
-              definitions: {
-                definition: string,
-                example: string
-              }[],
-              synonyms: string[]
-            }[],
-            sourceUrl: string
-          } = {
-            word: "",
-            phonetic: "",
-            sourceUrl: "",
-            meanings: []
-          }
-
-          wordInfo.phonetic = res.data[0].phonetic
-          wordInfo.word = res.data[0].word
-          wordInfo.sourceUrl = res.data[0].sourceUrls[0]
-          res.data[0].meanings.forEach((meaning, index) => {
-            wordInfo.meanings[index] = {
-              partOfSpeech: meaning.partOfSpeech,
-              synonyms: meaning.synonyms,
-              definitions: meaning.definitions
-            }
-
-          })
-
-          dispatch({
-            type: 'word',
-            error: null,
-            wordInfo: wordInfo
-          })
-        })
-        .catch((err) => {
-
-          const errData: {title: string, message: string, resolution: string} = err.response.data
-
-          dispatch({
-            wordInfo: null,
-            type: 'error',
-            error: {
-              ...errData
-            }
-          })
-        })
-  }, [])
-
-
-
-
   return (
     <>
       {/* App */}
@@ -175,10 +117,10 @@ function App() {
                   setFont('Serif')
                   setOptionToggle(!optionToggle)
                 }}>Serif</button>
-                <button className="font-mono hover:text-[#A445Ed] cursor-pointer" onClick={() => setFont(() => {
+                <button className="font-mono hover:text-[#A445Ed] cursor-pointer" onClick={() => {
                   setFont('Mono')
                   setOptionToggle(!optionToggle)
-                })}>Mono</button>
+                }}>Mono</button>
               </div>
             </div>
             {/* separator */}
@@ -225,7 +167,7 @@ function App() {
                     wordInfo.phonetic = res.data[0].phonetic
                     wordInfo.word = res.data[0].word
                     wordInfo.sourceUrl = res.data[0].sourceUrls[0]
-                    res.data[0].meanings.forEach((meaning, index) => {
+                    res.data[0].meanings.forEach((meaning: { partOfSpeech: never; synonyms: never; definitions: never; }, index: number) => {
                       wordInfo.meanings[index] = {
                         partOfSpeech: meaning.partOfSpeech,
                         synonyms: meaning.synonyms,
